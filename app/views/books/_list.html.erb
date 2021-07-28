@@ -1,0 +1,53 @@
+<% if book.errors.any? %>
+ <%= book.errors.count %>errors
+  <% book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
+
+      <table class="table">
+        <tbody><tr></tr>
+          <tr>
+	       <th>name</th>
+	       <th><%= @user.name %></th>
+	      </tr>
+          <tr>
+	        <th>introduction</th>
+	        <th><%= @user.introduction %></th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+       <!--<a class="btn btn-outline-secondary btn-block " ></a>-->
+
+       <%= link_to edit_user_path(current_user), class: 'btn-outline-secondary btn btn-primary w-100' do %>
+       <i class="fas fa-user-cog size-2x"></i>
+
+
+       <% end %>
+      </div>
+
+
+      <h2>New Book</h2>
+
+      <%= form_with model:book, local:true do |f| %>
+
+      <h4>Title</h4>
+      <%= f.text_field :title %>
+
+      <h4>Opinion</h4>
+      <%= f.text_area :body %>
+
+
+      <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book">
+
+
+
+      <% end %>
+    </div>
